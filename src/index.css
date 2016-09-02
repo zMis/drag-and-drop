@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+/* show the move cursor as the user moves the mouse over the panel header.*/
+#draggablePanelList .panel-heading {
+    cursor: move;
+}
