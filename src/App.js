@@ -1,25 +1,16 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-/*
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
-*/
+
 // Define React Component
 class Modul extends Component {
+
+construktor(PageBlockId,Id,PosId,Settings,Type){
+
+
+}
+
+
   render() {
     return (
       <div className={`col-xs-12 col-md-12`}>
@@ -32,7 +23,29 @@ class Modul extends Component {
   }
 }
 
-class PanelWebPart extends Component {
+
+
+// Define React Component
+class ModulType extends Component {
+/*
+constructor(Settings,Type,Possibilities){
+
+
+}
+*/
+  render() {
+    return (
+      <div className={`col-xs-12 col-md-12`}>
+        <li className="panel panel-info"> 
+          <div className="panel-heading">{this.props.type}
+          </div>
+        </li>     
+      </div>
+    );
+  }
+}
+
+class PageBlock extends Component {
   render() {
     return (
       <div className={`col-xs-${ this.props.size } col-md-${ this.props.size }`}>
@@ -49,17 +62,88 @@ class PanelWebPart extends Component {
   }
 }
          
-class PanelModuly extends Component {
+class ModuleTypes extends Component {
+/*
+constructor(){
+
+ArrTypes= [];
+
+const JsonData={
+"types":[
+    {"type":"news",
+    "possibilities":["header","left","right"],
+    "settings":["title","content"]
+  },
+    {"type":"text",
+    "possibilities":["header","left","right"],
+    "settings":["title","author","content"]
+     },
+    {"type":"anket",
+    "possibilities":["footer","left","right"],
+    "settings":["title"]
+  }
+  ]
+};
+
+}
+*/
+
+componentDidMount(){
+
+/*
+var URL='http://private-anon-4904ad187c-ccpiskvorky.apiary-mock.com/games';
+
+    fetch(URL, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      })
+      .then((response) => response.json(), (error) => {
+       // dispatch()
+      })
+      .then((payload) => {
+      //   type: 'START_DONE',
+          JsonData=payload;
+     
+      })
+      .catch((e) => {
+        
+      })
+
+      */
+      
+}
+
+
   render() {
+var JsonData={
+"types":[
+    {"type":"news",
+    "possibilities":["header","left","right"],
+    "settings":["title","content"]
+  },
+    {"type":"text",
+    "possibilities":["header","left","right"],
+    "settings":["title","author","content"]
+     },
+    {"type":"anket",
+    "possibilities":["footer","left","right"],
+    "settings":["title"]
+  }
+  ]
+};
+
+
     return (
       <div className="col-xs-12 col-md-4">
         <h2>{this.props.name}</h2>
         <div className="panel panel-info col-xs-12 col-md-12">
-          <Modul name="Novinky" />
-          <Modul name="Volný text" />
-          <Modul name="Slideshow" />
-          <Modul name="Rychlá rezervace" />
-          <Modul name="Anketa" />
+        {JsonData.types.map((type, i) =>
+          <ModulType key={i} type={type.type} possibilities={type.possibilities} settings={type.settings} />
+        )}
+
         </div>
       </div>
     );
@@ -73,10 +157,10 @@ class PanelStranka extends Component {
     return (
       <div className="col-xs-12 col-md-8">
         <h2>{this.props.name}</h2>
-        <PanelWebPart size="12" name="Hlavicka" />
-        <PanelWebPart size="6" name="Levy Sloupec" />
-        <PanelWebPart size="6" name="Pravy Sloupec" />
-        <PanelWebPart size="12" name="Paticka" />
+        <PageBlock size="12" name="Hlavicka" />
+        <PageBlock size="6" name="Levy Sloupec" />
+        <PageBlock size="6" name="Pravy Sloupec" />
+        <PageBlock size="12" name="Paticka" />
       </div>
     );
   }
@@ -88,7 +172,7 @@ class DragAndDropApp extends Component {
     return (    
       <div>
         <PanelStranka name="Editovaná stránka"  /> 
-        <PanelModuly name="Dostupné Moduly"  />
+        <ModuleTypes name="Dostupné Moduly"  />
       </div>
     );
   }
