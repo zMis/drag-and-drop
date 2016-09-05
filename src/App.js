@@ -52,9 +52,11 @@ class PageBlock extends Component {
         <h2>{this.props.name}</h2>
         <div className="panel panel-info col-xs-12 col-md-12">
           <ul id="draggablePanelList" className="list-unstyled">
-            <Modul name="Novinky" />
-            <Modul name="Volný text" />
-            <Modul name="Slideshow" />
+          
+              {this.props.moduls.map((type, i) =>
+          <Modul key={i} name={type.type} type={type.type} possibilities={type.possibilities} settings={type.settings} />
+        )}
+
           </ul>
         </div>        
       </div>
@@ -118,7 +120,41 @@ var URL='http://private-anon-4904ad187c-ccpiskvorky.apiary-mock.com/games';
 
 
   render() {
-var JsonData={
+    return (
+      <div className="col-xs-12 col-md-4">
+        <h2>{this.props.name}</h2>
+
+        {this.props.data.types.map((type, i) =>
+          <ModulType key={i}  type={type.type} possibilities={type.possibilities} settings={type.settings} />
+        )}
+
+      </div>
+    );
+  }
+}
+      
+        
+
+class PageBlocks extends Component {
+  render() {
+    return (
+      <div className="col-xs-12 col-md-8">
+        <h2>{this.props.name}</h2>
+
+        {this.props.data.blocks.map((block, i) =>
+          <PageBlock key={i} size={block.size}  name={block.name} moduls={block.moduls}  />
+        )}
+
+      </div>
+    );
+  }
+}
+
+
+class DragAndDropApp extends Component {
+  render() {
+      
+      var JsonData={
 "types":[
     {"type":"news",
     "possibilities":["header","left","right"],
@@ -132,47 +168,62 @@ var JsonData={
     "possibilities":["footer","left","right"],
     "settings":["title"]
   }
+  ],
+"blocks":[
+    {
+  "name":"header",
+  "size":12,
+  "moduls":[
+    {"type":"logo je cool",
+    "possibilities":["header","left","right"],
+    "settings":[{"title":"jjj","content":"tohle je header joo ","author":"All"}]
+     }
+  ]},
+  {"name":"left",
+  "size":6,
+  "moduls":[
+    {"type":"anket",
+    "possibilities":["footer","left","right"],
+    "settings":[{"title":"ahoj","content":"tohle jj alright","author":"Ondra"}]
+  }
+  ]},
+  {"name":"right",
+  "size":6,
+  "moduls":[
+    {"type":"news",
+    "possibilities":["header","left","right"],
+    "settings":[{"title":"Novinky","content":"To jsou super novinky","author":"Filip"}]
+  },
+    {"type":"text",
+    "possibilities":["header","left","right"],
+    "settings":[{"title":"loool","content":"tohle je left Xd","author":"Filip"}]
+     },
+    {"type":"anket",
+    "possibilities":["footer","left","right"],
+    "settings":[{"title":"jjj","content":"tohle je seeej","author":"Filip"}]
+  }
+  ]},
+  {"name":"footer",
+  "size":12,
+  "moduls":[
+    {"type":"Right",
+    "possibilities":["left","right"],
+    "settings":[{"title":"ahoj","content":"tohle je right","author":"Ondra"}]
+  },
+    {"type":"anket",
+    "possibilities":["footer","left","right"],
+    "settings":[{"title":"ahoj","content":"tohle je right","author":"Ondra"}]
+  }
   ]
-};
-
-
-    return (
-      <div className="col-xs-12 col-md-4">
-        <h2>{this.props.name}</h2>
-        <div className="panel panel-info col-xs-12 col-md-12">
-        {JsonData.types.map((type, i) =>
-          <ModulType key={i} type={type.type} possibilities={type.possibilities} settings={type.settings} />
-        )}
-
-        </div>
-      </div>
-    );
-  }
-}
-      
+    }]
+     }
+  ;
+   
         
-
-class PanelStranka extends Component {
-  render() {
-    return (
-      <div className="col-xs-12 col-md-8">
-        <h2>{this.props.name}</h2>
-        <PageBlock size="12" name="Hlavicka" />
-        <PageBlock size="6" name="Levy Sloupec" />
-        <PageBlock size="6" name="Pravy Sloupec" />
-        <PageBlock size="12" name="Paticka" />
-      </div>
-    );
-  }
-}
-
-
-class DragAndDropApp extends Component {
-  render() {
     return (    
       <div>
-        <PanelStranka name="Editovaná stránka"  /> 
-        <ModuleTypes name="Dostupné Moduly"  />
+        <PageBlocks name="Editovaná stránka"  data={JsonData} /> 
+        <ModuleTypes name="Dostupné Moduly"  data={JsonData} />
       </div>
     );
   }
