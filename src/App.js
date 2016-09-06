@@ -1,21 +1,53 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import remove from './remove.svg';
+import settings from './settings.svg';
+import { Draggable, Droppable } from 'react-drag-and-drop'
 import './App.css';
 
 // Define React Component
+
+/*
+var RemoveImageButton = React.createClass ({
+  render: function() {
+    return (
+      <img className="box-image pull-right"  width="25px" src={remove} alt="remove"  onClick={this.props.clickHandler} />
+    )
+  }
+});
+
+*/
+
+/*
+unmount: function() {
+  var node = this.getDOMNode();
+  React.unmountComponentAtNode(node);
+  $(node).remove();
+},
+
+handleClick: function() {
+  this.unmount();
+}
+*/
+
+
 class Modul extends Component {
 
-construktor(PageBlockId,Id,PosId,Settings,Type){
+  constructor(props) {
+    super(props);
 
-
-}
+  }
 
 
   render() {
     return (
       <div className={`col-xs-12 col-md-12`}>
         <li className="panel panel-info"> 
-          <div className="panel-heading">{this.props.name}
+          <div className="panel-heading">
+          {this.props.name}
+         <img className="box-image pull-right"  width="25px" src={remove} alt="remove" />
+         <img className="box-image pull-right"  width="25px"  src={settings} alt="settings" />
+      
           </div>
         </li>     
       </div>
@@ -27,18 +59,18 @@ construktor(PageBlockId,Id,PosId,Settings,Type){
 
 // Define React Component
 class ModulType extends Component {
-/*
-constructor(Settings,Type,Possibilities){
+     
+    constructor(props) {
+    super(props);
 
+  }
 
-}
-*/
   render() {
     return (
       <div className={`col-xs-12 col-md-12`}>
         <li className="panel panel-info"> 
-          <div className="panel-heading">{this.props.type}
-          </div>
+         <Draggable type="modultype" data={this.props}> <div className="panel-heading">{this.props.type}
+          </div></Draggable>
         </li>     
       </div>
     );
@@ -50,7 +82,10 @@ class PageBlock extends Component {
     return (
       <div className={`col-xs-${ this.props.size } col-md-${ this.props.size }`}>
         <h2>{this.props.name}</h2>
-        <div className="panel panel-info col-xs-12 col-md-12">
+        <Droppable
+                types={['modultype']} // <= allowed drop types 
+                onDrop={this.onDrop.bind(this)}>  
+          <div className="panel panel-info col-xs-12 col-md-12">
           <ul id="draggablePanelList" className="list-unstyled">
           
               {this.props.moduls.map((type, i) =>
@@ -58,41 +93,33 @@ class PageBlock extends Component {
         )}
 
           </ul>
-        </div>        
+  
+
+        </div>          </Droppable>    
       </div>
     );
   }
+  
+  onDrop(data) {
+        console.log(data)
+        // => banana  
+    }
 }
          
 class ModuleTypes extends Component {
-/*
-constructor(){
 
-ArrTypes= [];
-
-const JsonData={
-"types":[
-    {"type":"news",
-    "possibilities":["header","left","right"],
-    "settings":["title","content"]
-  },
-    {"type":"text",
-    "possibilities":["header","left","right"],
-    "settings":["title","author","content"]
-     },
-    {"type":"anket",
-    "possibilities":["footer","left","right"],
-    "settings":["title"]
+        constructor(props) {
+    super(props);
+    this.indents = [];
+this.indents = this.props.data.types.map((type, i) =>
+          <ModulType key={i}  type={type.type} possibilities={type.possibilities} settings={type.settings} />
+        )
   }
-  ]
-};
-
-}
-*/
+  
+  /*  
 
 componentDidMount(){
 
-/*
 var URL='http://private-anon-4904ad187c-ccpiskvorky.apiary-mock.com/games';
 
     fetch(URL, {
@@ -114,20 +141,14 @@ var URL='http://private-anon-4904ad187c-ccpiskvorky.apiary-mock.com/games';
         
       })
 
-      */
-      
 }
-
+*/
 
   render() {
     return (
       <div className="col-xs-12 col-md-4">
         <h2>{this.props.name}</h2>
-
-        {this.props.data.types.map((type, i) =>
-          <ModulType key={i}  type={type.type} possibilities={type.possibilities} settings={type.settings} />
-        )}
-
+        {this.indents}
       </div>
     );
   }
@@ -136,15 +157,20 @@ var URL='http://private-anon-4904ad187c-ccpiskvorky.apiary-mock.com/games';
         
 
 class PageBlocks extends Component {
+    constructor(props) {
+    super(props);
+    this.indents = [];
+this.indents = this.props.data.blocks.map((block, i) =>
+          <PageBlock key={i} size={block.size}  name={block.name} moduls={block.moduls}  />
+        )  
+  }
+
   render() {
+    
     return (
       <div className="col-xs-12 col-md-8">
         <h2>{this.props.name}</h2>
-
-        {this.props.data.blocks.map((block, i) =>
-          <PageBlock key={i} size={block.size}  name={block.name} moduls={block.moduls}  />
-        )}
-
+{this.indents}
       </div>
     );
   }
