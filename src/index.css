@@ -4,6 +4,6 @@ body {
   font-family: sans-serif;
 }
 /* show the move cursor as the user moves the mouse over the panel header.*/
-#draggablePanelList .panel-heading {
+.draggableitem {
     cursor: move;
 }
