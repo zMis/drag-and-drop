@@ -64,11 +64,7 @@ let idBlock;
                 ]
             }
         }
-    /*
-    this.deleteModule = (id_module,id_block) => {
-      this.props.data.blocks[id_block].moduls.splice (id_module, 1);
-      this.forceUpdate();
-      */
+        
       case 'SET_SETTINGS':
       return {
 

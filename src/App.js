@@ -21,23 +21,13 @@ const customStyles = {
 };
 
 class Modul extends Component {
-/*
-  constructor(props) {
-    super(props);
 
-    this.handleDelete = () => {
-     this.props.deleteModule(this.props.id,this.props.id_block);
-    }
-
-    this.handleSettings = () => {
-     this.props.setSetting(this.props.settings,this.props.id,this.props.id_block);
-    }
-
+  handleDelete() {
+    this.props.deleteModule(this.props.id,this.props.id_block)
   }
-*/
-handleDelete() {
-  this.props.deleteModule(this.props.id,this.props.id_block)
-}
+  handleSettings() {
+    //this.props.setSettings(this.props.settings, this.props.id, this.props.id_block)
+  }
 
   render() {
     return (
@@ -97,7 +87,6 @@ class PageBlock extends Component {
   onDrop(data){
     var data = JSON.parse(data.object);
     console.log(data)
-    //this.props.addModule(data, data.id, this.props.id, this.props.type);
     this.props.addModule(data, this.props.id)
     
   }
@@ -142,62 +131,9 @@ class PageBlocks extends Component {
 
 class DragAndDropApp extends Component {
 
-  /*constructor() {
-    super();
-    
 
-
-    this.setSettings = (settings,id_module,id_block) => {
-
-    this.props.data.blocks[id_block].moduls[id_module].settings=settings;
-
-      
-      // this.setState({data: data})
-      console.log(id_module);
-      console.log(id_block);
-      this.state.data.blocks[id_block].moduls.splice (id_module, 1);
-      //send(JsonData);
-      
-      this.forceUpdate();
-      
-    };
-
-    this.deleteModule = (id_module,id_block) => {
-      // this.setState({data: data})
-      console.log(id_module);
-      console.log(id_block);
-      this.props.data.blocks[id_block].moduls.splice (id_module, 1);
-      this.props.send();
-      this.forceUpdate();
-      
-    };
-   
-    this.addModule = (data,id_module,id_block,type) => {
-      //this.setState({data: data})
-      //  this.state.data.blocks[id_block].;
-      var length = this.props.data.blocks[1].moduls.length+1;
-      if(data.possibilities.includes(type)) {
-      this.props.data.blocks[id_block].moduls.push(
-          {
-            name:data.name,
-            type:data.type,
-            possibilities:data.possibilities,
-            settings:data.settings
-          }
-      );
-        this.props.send();
-          console.log("Vlozeno");
-    }else  {
-          console.log("Nelze vlozit do tohoto typu");
-          }
-      
-      
-      this.forceUpdate();
-    };
-  }*/
 
   render() {
-    //console.log(this.props.data.blocks[1]);
     return (
       <div>
         <PageBlocks name="Editovaná stránka" data={this.props.data} setSetting={this.setSetting} addModule={this.props.addModule} deleteModule={this.props.deleteModule} />

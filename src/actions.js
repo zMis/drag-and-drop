@@ -57,6 +57,17 @@ function deleteModule(id_module, id_block) {
         })
     }
 }
+function setSettings(settings, id_module, id_block) {
+    return function(dispatch) {
+        dispatch({
+            type: 'SET_SETTINGS',
+            payload: {
+              settings,
+                id_module,
+                id_block
+            }
+        })
+    }
+}
 
-
-export default { addModule, send, deleteModule }
+export default { addModule, send, deleteModule, setSettings }
