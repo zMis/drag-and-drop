@@ -3,6 +3,7 @@ var JsonData =
    "types":[
       {
          "type":"news",
+         "name":"Zpravy",
          "possibilities":[
             "header",
             "left",
@@ -12,9 +13,30 @@ var JsonData =
             "title",
             "content"
          ]
+      },      {
+         "type":"anket",
+         "name":"Anketa do Paticky",
+         "possibilities":[
+            "footer"
+         ],
+         "settings":[
+            "title",
+            "content"
+         ]
+      },      {
+         "type":"news",
+         "name":"Zpravy do Leva",
+         "possibilities":[
+            "left"
+         ],
+         "settings":[
+            "title",
+            "content"
+         ]
       },
       {
          "type":"text",
+         "name":"Volny text",
          "possibilities":[
             "header",
             "left",
@@ -28,6 +50,7 @@ var JsonData =
       },
       {
          "type":"anket",
+         "name":"Anketa",
          "possibilities":[
             "footer",
             "left",
@@ -40,11 +63,13 @@ var JsonData =
    ],
    "blocks":[
       {
-         "name":"header",
+         "name":"Hlavicka",
+         "type":"header",
          "size":12,
          "moduls":[
             {
-               "type":"logo je cool",
+               "type":"text",
+               "name":"Logo",
                "possibilities":[
                   "header",
                   "left",
@@ -61,11 +86,13 @@ var JsonData =
          ]
       },
       {
-         "name":"left",
+         "name":"Levy sloupec",
+           "type":"left",
          "size":6,
          "moduls":[
             {
                "type":"anket",
+               "name":"Anketa",
                "possibilities":[
                   "footer",
                   "left",
@@ -82,11 +109,13 @@ var JsonData =
          ]
       },
       {
-         "name":"right",
+         "name":"Pravy sloupec",
+           "type":"right",
          "size":6,
          "moduls":[
             {
                "type":"news",
+               "name":"Zpravy",
                "possibilities":[
                   "header",
                   "left",
@@ -102,6 +131,7 @@ var JsonData =
             },
             {
                "type":"text",
+               "name":"Obsah",
                "possibilities":[
                   "header",
                   "left",
@@ -117,6 +147,7 @@ var JsonData =
             },
             {
                "type":"anket",
+               "name":"Vtipna Anketa",
                "possibilities":[
                   "footer",
                   "left",
@@ -133,13 +164,14 @@ var JsonData =
          ]
       },
       {
-         "name":"footer",
+         "name":"Patička",
+           "type":"footer",
          "size":12,
          "moduls":[
             {
-               "type":"Right",
+               "type":"text",
+               "name":"Text do Prava",
                "possibilities":[
-                  "left",
                   "right"
                ],
                "settings":[
@@ -152,10 +184,9 @@ var JsonData =
             },
             {
                "type":"anket",
+               "name":"Anketa Do paticky",
                "possibilities":[
-                  "footer",
-                  "left",
-                  "right"
+                  "footer"
                ],
                "settings":[
                   {
