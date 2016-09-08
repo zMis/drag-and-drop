@@ -33,3 +33,15 @@ export function send(data) {
     }
  
 }
+
+export function addModule(newModule, id_block) {
+    return function(dispatch) {
+        dispatch({
+            type: 'ADD_MODULE',
+            payload: {
+                newModule,
+                id_block
+            }
+        })
+    }
+}

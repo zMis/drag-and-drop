@@ -5,7 +5,7 @@ import { Draggable, Droppable } from 'react-drag-and-drop'
 import './App.css';
 import JsonData from './data.js';
 import {connect} from 'react-redux';
-import send from './actions';
+import {send, addModule} from './actions';
 var Modal = require('react-modal');
 
 //this force update na refresh
@@ -64,10 +64,12 @@ this.handleSettings = () => {
     }
 
   }
-
-getInitialState: function() {
+/*
+  getInitialState: function() {
     return { modalIsOpen: false };
-  },
+  }
+*/
+
 
   render() {
     return (
@@ -130,7 +132,7 @@ class PageBlock extends Component {
 
   onDrop(data){
     var data = JSON.parse(data.object);
-    this.props.addModule(data,data.id,this.props.id,this.props.type);
+    //this.props.addModule(data, data.id, this.props.id, this.props.type);
   }
   
 }
@@ -175,12 +177,12 @@ class DragAndDropApp extends Component {
 
   constructor() {
     super();
-    this.state = {data: JsonData};
+    
 
 
     this.setSettings = (settings,id_module,id_block) => {
 
- this.state.data.blocks[id_block].moduls[id_module].settings=settings;
+ this.props.data.blocks[id_block].moduls[id_module].settings=settings;
 
       /*
       // this.setState({data: data})
@@ -189,7 +191,6 @@ class DragAndDropApp extends Component {
       this.state.data.blocks[id_block].moduls.splice (id_module, 1);
       //send(JsonData);
       */
-      
       this.forceUpdate();
       
     };
@@ -198,17 +199,18 @@ class DragAndDropApp extends Component {
       // this.setState({data: data})
       console.log(id_module);
       console.log(id_block);
-      this.state.data.blocks[id_block].moduls.splice (id_module, 1);
-      //send(JsonData);
+      this.props.data.blocks[id_block].moduls.splice (id_module, 1);
+      this.props.send();
       this.forceUpdate();
       
     };
-    this.addModule = (data,id_module,id_block,type) => {
+   //this.props.addModule();
+   /* this.addModule = (data,id_module,id_block,type) => {
       //this.setState({data: data})
       //  this.state.data.blocks[id_block].;
-      var length=this.state.data.blocks[1].moduls.length+1;
+      var length = this.props.data.blocks[1].moduls.length+1;
       if(data.possibilities.includes(type)) {
-      this.state.data.blocks[id_block].moduls.push(
+      this.props.data.blocks[id_block].moduls.push(
           {
             name:data.name,
             type:data.type,
@@ -216,29 +218,31 @@ class DragAndDropApp extends Component {
             settings:data.settings
           }
       );
-
+        this.props.send();
           console.log("Vlozeno");
     }else  {
           console.log("Nelze vlozit do tohoto typu");
           }
       
-      //send(JsonData);
+      
       this.forceUpdate();
-    };
+    };*/
   }
 
   render() {
-    console.log(this.state.data.blocks[1]);
+    console.log(this.props.data.blocks[1]);
     return (
       <div>
-        <PageBlocks name="Editovaná stránka"  data={this.state.data} setSetting={this.setSetting} addModule={this.addModule} deleteModule={this.deleteModule} />
-        <ModuleTypes name="Dostupné Moduly"  data={this.state.data} />
+        <PageBlocks name="Editovaná stránka"  data={this.props.data} setSetting={this.setSetting} addModule={this.addModule} deleteModule={this.deleteModule} />
+        <ModuleTypes name="Dostupné Moduly"  data={this.props.data} />
       </div>
     );
   }
 }
 function mapStateToProps(state) {
-  return state
+  return {
+    data: state.data
+  }
 }
 /*
 App.propTypes = {
@@ -251,5 +255,9 @@ App.propTypes = {
 
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  {
+    send,
+    addModule
+  }
 )(DragAndDropApp)
