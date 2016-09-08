@@ -1,4 +1,4 @@
-import {applyMiddleware, createStore} from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import reducer from './reducers';
 
 function logger(store) {
@@ -25,7 +25,7 @@ function thunk(store) {
   }
 }
 
-const store = createStore(
+let store = createStore(
   reducer,
   applyMiddleware(logger, thunk)
 );

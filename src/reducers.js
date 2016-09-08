@@ -7,6 +7,7 @@ const initialState = {
 
 
 export default function reducer(state = initialState, action = {}) {
+
   if (!state) return initialState;
 
   switch (action.type) {
@@ -22,25 +23,26 @@ export default function reducer(state = initialState, action = {}) {
         data: action.payload
       }
 
-      case 'ADD_MODULE':
-      return {
-          ...state,
-          data: {
-              ...state.data,
-              blocks: [
-                  ...state.data.blocks.slice(0, action.payload.id_block),
-                  {
-                      ...state.data.blocks[id_block],
-                      moduls: [
-                          ...state.data.blocks[id_block].moduls,
-                          action.payload.newModule
-                      ]
-                  },
-                  ...state.data.blocks.slice(id_block+1)
-              ]
-          }
-      }
-      //this.props.data.blocks[id_block].moduls
+    case 'ADD_MODULE':
+        let idBlock = action.payload.id_block
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                blocks: [
+                    ...state.data.blocks.slice(0, idBlock),
+                    {
+                        ...state.data.blocks[idBlock],
+                        moduls: [
+                            ...state.data.blocks[idBlock].moduls,
+                            action.payload.newModule
+                        ]
+                    },
+                    ...state.data.blocks.slice(idBlock + 1)
+                ]
+            }
+        }
+    //this.props.data.blocks[id_block].moduls
 
     default:
       return state;

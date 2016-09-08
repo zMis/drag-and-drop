@@ -4,8 +4,7 @@ import DragAndDropApp from './App';
 import './index.css';
 import { Draggable, Droppable } from 'react-drag-and-drop'
 import store from './store';
-import {Provider,ReactRedux} from 'react-redux';
-
+import { Provider,ReactRedux } from 'react-redux';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -13,4 +12,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-

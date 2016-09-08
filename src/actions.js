@@ -1,4 +1,4 @@
-export function send(data) {
+function send(data) {
   return function(dispatch) {
 
     dispatch({
@@ -9,8 +9,8 @@ export function send(data) {
     fetch('http://devel.atway.cz/json.php', {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+         /* 'Accept': 'application/json',
+          'Content-Type': 'application/json'*/
         },
         body: JSON.stringify({
             data: data
@@ -34,7 +34,7 @@ export function send(data) {
  
 }
 
-export function addModule(newModule, id_block) {
+function addModule(newModule, id_block) {
     return function(dispatch) {
         dispatch({
             type: 'ADD_MODULE',
@@ -45,3 +45,5 @@ export function addModule(newModule, id_block) {
         })
     }
 }
+
+export default { addModule, send }

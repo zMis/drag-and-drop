@@ -4,9 +4,10 @@ import settings from './settings.svg';
 import { Draggable, Droppable } from 'react-drag-and-drop'
 import './App.css';
 import JsonData from './data.js';
-import {connect} from 'react-redux';
-import {send, addModule} from './actions';
+import { connect } from 'react-redux';
+import actions from './actions';
 var Modal = require('react-modal');
+import store from './store';
 
 //this force update na refresh
 
@@ -132,7 +133,9 @@ class PageBlock extends Component {
 
   onDrop(data){
     var data = JSON.parse(data.object);
+    console.log(data)
     //this.props.addModule(data, data.id, this.props.id, this.props.type);
+    this.props.addModule(data, this.props.id)
   }
   
 }
@@ -175,22 +178,22 @@ class PageBlocks extends Component {
 
 class DragAndDropApp extends Component {
 
-  constructor() {
+  /*constructor() {
     super();
     
 
 
     this.setSettings = (settings,id_module,id_block) => {
 
- this.props.data.blocks[id_block].moduls[id_module].settings=settings;
+    this.props.data.blocks[id_block].moduls[id_module].settings=settings;
 
-      /*
+      
       // this.setState({data: data})
       console.log(id_module);
       console.log(id_block);
       this.state.data.blocks[id_block].moduls.splice (id_module, 1);
       //send(JsonData);
-      */
+      
       this.forceUpdate();
       
     };
@@ -204,8 +207,8 @@ class DragAndDropApp extends Component {
       this.forceUpdate();
       
     };
-   //this.props.addModule();
-   /* this.addModule = (data,id_module,id_block,type) => {
+   
+    this.addModule = (data,id_module,id_block,type) => {
       //this.setState({data: data})
       //  this.state.data.blocks[id_block].;
       var length = this.props.data.blocks[1].moduls.length+1;
@@ -226,19 +229,20 @@ class DragAndDropApp extends Component {
       
       
       this.forceUpdate();
-    };*/
-  }
+    };
+  }*/
 
   render() {
-    console.log(this.props.data.blocks[1]);
+    //console.log(this.props.data.blocks[1]);
     return (
       <div>
-        <PageBlocks name="Editovaná stránka"  data={this.props.data} setSetting={this.setSetting} addModule={this.addModule} deleteModule={this.deleteModule} />
-        <ModuleTypes name="Dostupné Moduly"  data={this.props.data} />
+        <PageBlocks name="Editovaná stránka" data={this.props.data} setSetting={this.setSetting} addModule={this.props.addModule} deleteModule={this.deleteModule} />
+        <ModuleTypes name="Dostupné Moduly" data={this.props.data} />
       </div>
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     data: state.data
@@ -256,8 +260,5 @@ App.propTypes = {
 
 export default connect(
   mapStateToProps,
-  {
-    send,
-    addModule
-  }
+  actions
 )(DragAndDropApp)
