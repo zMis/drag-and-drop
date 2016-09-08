@@ -46,4 +46,17 @@ function addModule(newModule, id_block) {
     }
 }
 
-export default { addModule, send }
+function deleteModule(id_module, id_block) {
+    return function(dispatch) {
+        dispatch({
+            type: 'DELETE_MODULE',
+            payload: {
+                id_module,
+                id_block
+            }
+        })
+    }
+}
+
+
+export default { addModule, send, deleteModule }

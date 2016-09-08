@@ -9,33 +9,6 @@ import actions from './actions';
 var Modal = require('react-modal');
 import store from './store';
 
-//this force update na refresh
-
-
-
-/*
-var RemoveImageButton = React.createClass ({
-  render: function() {
-    return (
-      <img className="box-image pull-right"  width="25px" src={remove} alt="remove"  onClick={this.props.clickHandler} />
-    )
-  }
-});
-
-*/
-
-/*
-unmount: function() {
-  var node = this.getDOMNode();
-  React.unmountComponentAtNode(node);
-  $(node).remove();
-},
-
-handleClick: function() {
-  this.unmount();
-}
-*/
-
 const customStyles = {
   content : {
     top                   : '50%',
@@ -48,29 +21,23 @@ const customStyles = {
 };
 
 class Modul extends Component {
-
+/*
   constructor(props) {
     super(props);
-
-
-
 
     this.handleDelete = () => {
      this.props.deleteModule(this.props.id,this.props.id_block);
     }
 
-
-this.handleSettings = () => {
+    this.handleSettings = () => {
      this.props.setSetting(this.props.settings,this.props.id,this.props.id_block);
     }
 
   }
-/*
-  getInitialState: function() {
-    return { modalIsOpen: false };
-  }
 */
-
+handleDelete() {
+  this.props.deleteModule(this.props.id,this.props.id_block)
+}
 
   render() {
     return (
@@ -78,7 +45,7 @@ this.handleSettings = () => {
         <li className="panel panel-info"> 
           <div className="panel-heading">
             {this.props.name}
-            <img className="box-image pull-right"  width="25px" onClick={this.handleDelete} src={remove} alt="remove" />
+            <img className="box-image pull-right"  width="25px" onClick={this.handleDelete.bind(this)} src={remove} alt="remove" />
             <img className="box-image pull-right"  width="25px"  src={settings} alt="settings" />
 
           </div>
@@ -110,8 +77,6 @@ class ModulType extends Component {
 
 class PageBlock extends Component {
 
-
-
   render() {
     return (
       <div className={`col-xs-${ this.props.size } col-md-${this.props.size}`}>
@@ -129,13 +94,12 @@ class PageBlock extends Component {
     );
   }
 
-
-
   onDrop(data){
     var data = JSON.parse(data.object);
     console.log(data)
     //this.props.addModule(data, data.id, this.props.id, this.props.type);
     this.props.addModule(data, this.props.id)
+    
   }
   
 }
@@ -236,7 +200,7 @@ class DragAndDropApp extends Component {
     //console.log(this.props.data.blocks[1]);
     return (
       <div>
-        <PageBlocks name="Editovaná stránka" data={this.props.data} setSetting={this.setSetting} addModule={this.props.addModule} deleteModule={this.deleteModule} />
+        <PageBlocks name="Editovaná stránka" data={this.props.data} setSetting={this.setSetting} addModule={this.props.addModule} deleteModule={this.props.deleteModule} />
         <ModuleTypes name="Dostupné Moduly" data={this.props.data} />
       </div>
     );
@@ -248,15 +212,6 @@ function mapStateToProps(state) {
     data: state.data
   }
 }
-/*
-App.propTypes = {
-  grid: PropTypes.array.isRequired,
-  name: PropTypes.string,
-  turn: PropTypes.string.isRequired,
-  start: PropTypes.func.isRequired,
-}
-*/
-
 
 export default connect(
   mapStateToProps,
