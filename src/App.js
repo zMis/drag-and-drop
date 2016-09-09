@@ -38,8 +38,9 @@ constructor(props){
         return { modalIsOpen: false };
     }
     openModal() {
+
         this.modalIsOpen=true;
-        console.log(this.props.settings[0]);
+     console.log(this.props.settings);
         this.forceUpdate();
     }
 
@@ -108,7 +109,7 @@ class ModulType extends Component {
       <div className={`col-xs-12 col-md-12`}>
         <li className="panel panel-info"> 
           <Draggable type="object" data={json}>
-            <div className="panel-heading draggableitem">
+            <div className="panel-heading draggableitem" draggable="true">
               {this.props.name}
             </div>
           </Draggable>
@@ -144,10 +145,10 @@ class PageBlock extends Component {
       data.settings.forEach(function(elem) {
           settings[elem]="";
       });
-      data.settings= settings;
+      data.settings[0]= settings;
     this.props.addModule(data, this.props.id)
     let state = store.getState()
-    this.props.send(state.data)
+  //  this.props.send(state.data)
     
   }
 }
