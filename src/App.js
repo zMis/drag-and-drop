@@ -141,14 +141,11 @@ class PageBlock extends Component {
   onDrop(data){
 
     var data = JSON.parse(data.object);
-   var settings={};
-      data.settings.forEach(function(elem) {
-          settings[elem]="";
-      });
-      data.settings[0]= settings;
-    this.props.addModule(data, this.props.id)
+    console.log(data)
+    console.log('type:', this.props.type)
+    this.props.addModule(data, this.props.id, this.props.type)
     let state = store.getState()
-  //  this.props.send(state.data)
+    //this.props.send(state.data)
     
   }
 }
