@@ -56,8 +56,8 @@ let idBlock;
                     {
                         ...state.data.blocks[idBlock],
                         moduls: [
-                            ...state.data.blocks[idBlock].moduls.splice(idModule, 1)
-                            
+                            ...state.data.blocks[idBlock].moduls.slice(0, idModule),
+                            ...state.data.blocks[idBlock].moduls.slice(idModule+ 1)
                         ]
                     },
                     ...state.data.blocks.slice(idBlock + 1)
@@ -70,6 +70,16 @@ let idBlock;
 
       }
 
+      case 'OPEN_MODAL':
+          return {
+              modalIsOpen: true
+          }
+      
+      case 'CLOSE_MODAL':
+          return {
+              modalIsOpen: false
+          }
+      
     default:
       return state;
   }

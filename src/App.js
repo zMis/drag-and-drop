@@ -21,6 +21,12 @@ const customStyles = {
 };
 
 class Modul extends Component {
+ //   this.forceUpdate();
+
+constructor(props){
+   super(props);
+    this.modalIsOpen=false;
+}
 
   handleDelete() {
     this.props.deleteModule(this.props.id,this.props.id_block)
@@ -28,16 +34,75 @@ class Modul extends Component {
   handleSettings() {
     //this.props.setSettings(this.props.settings, this.props.id, this.props.id_block)
   }
+    getInitialState() {
+        return { modalIsOpen: false };
+    }
+    openModal() {
+        this.modalIsOpen=true;
+        console.log(this.props.settings[0]);
+        this.forceUpdate();
+    }
 
-  render() {
+    afterOpenModal() {
+        this.refs.subtitle.style.color = '#f00';
+    }
+    closeModal() {
+    this.modalIsOpen=false;
+    this.forceUpdate();
+}
+
+
+
+
+
+    /*
+     ruzne cykly co se daji pouzit na settings
+
+     {this.props.settings[0].keys(yourObject).map(function(key) {
+     return <div>Key: {key}, Value: {yourObject[key]}</div>;
+     })}
+     for (var key in array) {
+     let value = array[key];
+     console.log(value);
+     }
+
+     {this.props.moduls.map((type, i) =>
+     <Modul key={i} id={i} id_block={this.props.id} name={type.name} type={type.type} possibilities={type.possibilities} settings={type.settings} setSetting={this.setSetting} deleteModule={this.props.deleteModule} />
+     )}
+     */
+
+
+    render() {
     return (
       <div className={`col-xs-12 col-md-12`}>
         <li className="panel panel-info"> 
           <div className="panel-heading">
             {this.props.name}
             <img className="box-image pull-right"  width="25px" onClick={this.handleDelete.bind(this)} src={remove} alt="remove" />
-            <img className="box-image pull-right"  width="25px"  src={settings} alt="settings" />
+            <img className="box-image pull-right"  width="25px" onClick={this.openModal.bind(this)} src={settings} alt="settings" />
 
+              <Modal
+                  isOpen={this.modalIsOpen}
+                //  onAfterOpen={this.afterOpenModal}
+                //  onRequestClose={this.closeModal}
+                  style={customStyles} >
+
+                  <h2 ref="subtitle"> {this.props.name}</h2>
+                  <button onClick={this.closeModal.bind(this)}>close</button>
+                  <form>
+
+
+
+                      <label>title</label>
+                      <input
+                          className="name-input"
+                          ref={"title"}
+                          type="text"
+                          placeholder={this.props.settings[0].title}
+                      />
+
+                  </form>
+              </Modal>
           </div>
         </li>     
       </div>
@@ -86,11 +151,11 @@ class PageBlock extends Component {
 
   onDrop(data){
     var data = JSON.parse(data.object);
-    console.log(data)
-    this.props.addModule(data, this.props.id)
-    
+
+    console.log(data);
+
+    this.props.addModule(data, this.props.id);
   }
-  
 }
 
 class ModuleTypes extends Component {
@@ -130,8 +195,6 @@ class PageBlocks extends Component {
 }
 
 class DragAndDropApp extends Component {
-
-
 
   render() {
     return (

@@ -70,4 +70,26 @@ function setSettings(settings, id_module, id_block) {
     }
 }
 
+function openModal() {
+    return function(dispatch) {
+        dispatch({
+            type: 'OPEN_MODAL',
+            payload: {
+                modalIsOpen
+            }
+        })
+    }
+}
+
+function closeModal() {
+    return function(dispatch) {
+        dispatch({
+            type: 'CLOSE_MODAL',
+            payload: {
+                modalIsOpen
+            }
+        })
+    }
+}
+
 export default { addModule, send, deleteModule, setSettings }
