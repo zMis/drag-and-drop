@@ -49,6 +49,11 @@ constructor(props){
     }
     closeModal() {
     this.modalIsOpen=false;
+
+    //  jak z toho imputu ziskat data hmm?  this.refs.subtitle.style.color = '#f00';
+
+
+    this.props.setSettings(this.props.settings[0],this.props.id,this.props.id_block);
     this.forceUpdate();
 }
     render() {
@@ -129,7 +134,7 @@ class PageBlock extends Component {
           <div className="PageBlock panel col-xs-12 col-md-12">
             <ul id="draggablePanelList" className="list-unstyled">
               {this.props.moduls.map((type, i) =>
-                <Modul key={i} id={i} id_block={this.props.id} name={type.name} type={type.type} possibilities={type.possibilities} settings={type.settings} setSetting={this.setSetting} deleteModule={this.props.deleteModule} />
+                <Modul key={i} id={i} id_block={this.props.id} name={type.name} type={type.type} possibilities={type.possibilities} settings={type.settings} setSettings={this.props.setSettings}  deleteModule={this.props.deleteModule} />
               )}
             </ul>
           </div>
@@ -140,7 +145,13 @@ class PageBlock extends Component {
 
   onDrop(data){
 
-    var data = JSON.parse(data.object);
+      var data = JSON.parse(data.object);
+      var settings={};
+      data.settings.forEach(function(elem) {
+          settings[elem]="";
+      });
+      data.settings[0]= settings;
+
     console.log(data)
     console.log('type:', this.props.type)
     this.props.addModule(data, this.props.id, this.props.type)
@@ -172,7 +183,7 @@ class PageBlocks extends Component {
 
   renderBlocks() {
     return this.props.data.blocks.map((block, i) =>
-      <PageBlock key={i} id={i} size={block.size} type={block.type} name={block.name} moduls={block.moduls} addModule={this.props.addModule} deleteModule={this.props.deleteModule}  send={this.props.send}/>
+      <PageBlock key={i} id={i} size={block.size} type={block.type} name={block.name} moduls={block.moduls} setSettings={this.props.setSettings}  addModule={this.props.addModule} deleteModule={this.props.deleteModule}  send={this.props.send}/>
     )
   }
 
@@ -191,7 +202,7 @@ class DragAndDropApp extends Component {
   render() {
     return (
       <div>
-        <PageBlocks name="Editovaná stránka" data={this.props.data} setSetting={this.setSetting} addModule={this.props.addModule} deleteModule={this.props.deleteModule} send={this.props.send}/>
+        <PageBlocks name="Editovaná stránka" data={this.props.data} setSettings={this.props.setSettings} addModule={this.props.addModule} deleteModule={this.props.deleteModule} send={this.props.send}/>
         <ModuleTypes name="Dostupné Moduly" data={this.props.data} />
       </div>
     );

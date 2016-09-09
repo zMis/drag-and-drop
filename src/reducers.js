@@ -77,9 +77,30 @@ let idBlock;
         }
 
       case 'SET_SETTINGS':
+          idBlock = action.payload.id_block
+          idModule = action.payload.id_module
       return {
+              ...state,
+              data: {
+                  ...state.data,
+                  blocks: [
+                      ...state.data.blocks.slice(0, idBlock),
+                      {
+                          ...state.data.blocks[idBlock],
+                          moduls: [
+                              ...state.data.blocks[idBlock].moduls.slice(0, idModule),
+                              {
+                                  ...state.data.blocks[idBlock].moduls[idModule]
 
-      }
+                              },
+                                ...state.data.blocks[idBlock].moduls.slice(idModule+ 1)
+                          ]
+                      },
+                      ...state.data.blocks.slice(idBlock + 1)
+                  ]
+              }
+          }
+
 
       case 'OPEN_MODAL':
           return {
