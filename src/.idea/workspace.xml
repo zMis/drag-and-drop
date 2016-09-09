@@ -24,8 +24,8 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="100" column="60" selection-start-line="100" selection-start-column="60" selection-end-line="100" selection-end-column="60" />
+            <state relative-caret-position="578">
+              <caret line="114" column="12" selection-start-line="114" selection-start-column="12" selection-end-line="114" selection-end-column="12" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
                 <marker date="1473380398232" expanded="true" signature="5386:5677" ph="{...}" />
@@ -176,15 +176,15 @@
       <option name="presentableId" value="Default" />
       <updated>1473366119490</updated>
       <workItem from="1473366121171" duration="4335000" />
-      <workItem from="1473370703862" duration="9690000" />
+      <workItem from="1473370703862" duration="9815000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14025000" />
+    <option name="totallyTimeSpent" value="14150000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -344,8 +344,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="100" column="60" selection-start-line="100" selection-start-column="60" selection-end-line="100" selection-end-column="60" />
+        <state relative-caret-position="578">
+          <caret line="114" column="12" selection-start-line="114" selection-start-column="12" selection-end-line="114" selection-end-column="12" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
             <marker date="1473380398232" expanded="true" signature="5386:5677" ph="{...}" />
