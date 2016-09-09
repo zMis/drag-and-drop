@@ -150,11 +150,13 @@ class PageBlock extends Component {
   }
 
   onDrop(data){
+    
     var data = JSON.parse(data.object);
-
-    console.log(data);
-
-    this.props.addModule(data, this.props.id);
+    console.log(data)
+    this.props.addModule(data, this.props.id)
+    let state = store.getState()
+    this.props.send(state.data)
+    
   }
 }
 
@@ -180,7 +182,7 @@ class PageBlocks extends Component {
 
   renderBlocks() {
     return this.props.data.blocks.map((block, i) =>
-      <PageBlock key={i} id={i} size={block.size} type={block.type} setSetting={this.setSetting} name={block.name} moduls={block.moduls} addModule={this.props.addModule} deleteModule={this.props.deleteModule}  />
+      <PageBlock key={i} id={i} size={block.size} type={block.type} name={block.name} moduls={block.moduls} addModule={this.props.addModule} deleteModule={this.props.deleteModule}  send={this.props.send}/>
     )
   }
 
@@ -199,7 +201,7 @@ class DragAndDropApp extends Component {
   render() {
     return (
       <div>
-        <PageBlocks name="Editovaná stránka" data={this.props.data} setSetting={this.setSetting} addModule={this.props.addModule} deleteModule={this.props.deleteModule} />
+        <PageBlocks name="Editovaná stránka" data={this.props.data} setSetting={this.setSetting} addModule={this.props.addModule} deleteModule={this.props.deleteModule} send={this.props.send}/>
         <ModuleTypes name="Dostupné Moduly" data={this.props.data} />
       </div>
     );

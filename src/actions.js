@@ -1,10 +1,5 @@
-function send(data) {
+function send(state) {
   return function(dispatch) {
-
-    dispatch({
-        type: 'DROP',
-        data
-      })
 
     fetch('http://devel.atway.cz/json.php', {
         method: 'POST',
@@ -12,14 +7,13 @@ function send(data) {
          /* 'Accept': 'application/json',
           'Content-Type': 'application/json'*/
         },
-        body: JSON.stringify({
-            data: data
-        })
+        body: JSON.stringify(state)
       })
       .then((response) => response.json(), (error) => {
         dispatch()
       })
       .then((payload) => {
+        console.log(payload)
         dispatch({
           type: 'DONE',
           payload: payload

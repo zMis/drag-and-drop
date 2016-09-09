@@ -12,11 +12,6 @@ let idBlock;
 
   switch (action.type) {
       
-    case 'DROP':
-      return {
-        ...state,
-        data: action.data
-      }
 
     case 'DONE':
       return {
@@ -43,7 +38,6 @@ let idBlock;
                 ]
             }
         }
-
         case 'DELETE_MODULE':
         idBlock = action.payload.id_block
         let idModule = action.payload.id_module
@@ -64,7 +58,28 @@ let idBlock;
                 ]
             }
         }
-        
+        /*
+        case 'DELETE_MODULE':
+        idBlock = action.payload.id_block
+        let idModule = action.payload.id_module
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                blocks: [
+                    ...state.data.blocks.slice(0, idBlock),
+                    {
+                        ...state.data.blocks[idBlock],
+                        moduls: [
+                            ...state.data.blocks[idBlock].moduls.slice(0, idModule),
+                            ...state.data.blocks[idBlock].moduls.slice(idModule+ 1)
+                        ]
+                    },
+                    ...state.data.blocks.slice(idBlock + 1)
+                ]
+            }
+        }*/
+
       case 'SET_SETTINGS':
       return {
 
