@@ -153,9 +153,10 @@ class PageBlock extends Component {
     
     var data = JSON.parse(data.object);
     console.log(data)
-    this.props.addModule(data, this.props.id)
+    console.log('type:', this.props.type)
+    this.props.addModule(data, this.props.id, this.props.type)
     let state = store.getState()
-    this.props.send(state.data)
+    //this.props.send(state.data)
     
   }
 }

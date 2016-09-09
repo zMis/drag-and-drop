@@ -19,8 +19,8 @@ function send(state) {
           payload: payload
         })
       })
-      .catch((e) => {
-        
+      .catch((err) => {
+        console.log("fatch error: ", err)
       })
       
       
@@ -28,13 +28,14 @@ function send(state) {
  
 }
 
-function addModule(newModule, id_block) {
+function addModule(newModule, id_block, type) {
     return function(dispatch) {
         dispatch({
             type: 'ADD_MODULE',
             payload: {
                 newModule,
-                id_block
+                id_block,
+                type
             }
         })
     }
