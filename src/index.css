@@ -6,4 +6,26 @@ body {
 /* show the move cursor as the user moves the mouse over the panel header.*/
 .draggableitem {
     cursor: move;
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
 }
+
+.panel{
+   margin:10px;
+}
+
+.PageBlock{
+    border: 2px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: rgb(243, 248, 250);
+}
+
+.panel-heading {
+    padding: 10px 15px;
+    border: 2px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+

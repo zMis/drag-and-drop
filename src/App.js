@@ -50,29 +50,23 @@ constructor(props){
     this.modalIsOpen=false;
     this.forceUpdate();
 }
-
-
-
-
-
-    /*
-     ruzne cykly co se daji pouzit na settings
-
-     {this.props.settings[0].keys(yourObject).map(function(key) {
-     return <div>Key: {key}, Value: {yourObject[key]}</div>;
-     })}
-     for (var key in array) {
-     let value = array[key];
-     console.log(value);
-     }
-
-     {this.props.moduls.map((type, i) =>
-     <Modul key={i} id={i} id_block={this.props.id} name={type.name} type={type.type} possibilities={type.possibilities} settings={type.settings} setSetting={this.setSetting} deleteModule={this.props.deleteModule} />
-     )}
-     */
-
-
     render() {
+
+    var inputs = [];
+
+    for (var key in this.props.settings[0]){
+        inputs.push(
+            <div>
+            <label>{key}</label>
+            <input
+        className="name-input"
+        ref={key}
+        type="text"
+        defaultValue ={this.props.settings[0][key]}
+          />
+         </div>
+        );
+    }
     return (
       <div className={`col-xs-12 col-md-12`}>
         <li className="panel panel-info"> 
@@ -87,21 +81,15 @@ constructor(props){
                 //  onRequestClose={this.closeModal}
                   style={customStyles} >
 
-                  <h2 ref="subtitle"> {this.props.name}</h2>
-                  <button onClick={this.closeModal.bind(this)}>close</button>
-                  <form>
-
-
-
-                      <label>title</label>
-                      <input
-                          className="name-input"
-                          ref={"title"}
-                          type="text"
-                          placeholder={this.props.settings[0].title}
-                      />
-
+                  <h2 ref={this.props.name}> {this.props.name}</h2>
+                 <form>
+                      {inputs}
                   </form>
+                  <div className="col-md-4 text-center">
+                      <button onClick={this.closeModal.bind(this)} id="singlebutton" name="singlebutton" className="btn btn-primary">
+                          Uložit
+                      </button>
+                  </div>
               </Modal>
           </div>
         </li>     
@@ -133,11 +121,11 @@ class ModulType extends Component {
 class PageBlock extends Component {
 
   render() {
-    return (
+   return (
       <div className={`col-xs-${ this.props.size } col-md-${this.props.size}`}>
         <h2>{this.props.name}</h2>
         <Droppable types={['object']} onDrop={this.onDrop.bind(this)}>
-          <div className="panel panel-info col-xs-12 col-md-12">
+          <div className="PageBlock panel col-xs-12 col-md-12">
             <ul id="draggablePanelList" className="list-unstyled">
               {this.props.moduls.map((type, i) =>
                 <Modul key={i} id={i} id_block={this.props.id} name={type.name} type={type.type} possibilities={type.possibilities} settings={type.settings} setSetting={this.setSetting} deleteModule={this.props.deleteModule} />
@@ -150,9 +138,13 @@ class PageBlock extends Component {
   }
 
   onDrop(data){
-    
+
     var data = JSON.parse(data.object);
-    console.log(data)
+   var settings={};
+      data.settings.forEach(function(elem) {
+          settings[elem]="";
+      });
+      data.settings= settings;
     this.props.addModule(data, this.props.id)
     let state = store.getState()
     this.props.send(state.data)
