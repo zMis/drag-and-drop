@@ -70,7 +70,7 @@ function openModal() {
         dispatch({
             type: 'OPEN_MODAL',
             payload: {
-                modalIsOpen
+                modalIsOpen: true
             }
         })
     }
@@ -81,10 +81,10 @@ function closeModal() {
         dispatch({
             type: 'CLOSE_MODAL',
             payload: {
-                modalIsOpen
+                modalIsOpen:false
             }
         })
     }
 }
 
-export default { addModule, send, deleteModule, setSettings }
+export default { addModule, send, deleteModule, setSettings, openModal, closeModal }
